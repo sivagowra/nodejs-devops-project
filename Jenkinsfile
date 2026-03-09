@@ -11,7 +11,7 @@ pipeline {
 
         stage('Checkout Code') {
             steps {
-                git 'https://github.com/yourrepo/nodejs-devops-project.git'
+                git 'https://github.com/sivagowra/nodejs-devops-project.git'
             }
         }
 
