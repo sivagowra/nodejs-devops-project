@@ -1,0 +1,32 @@
+1️⃣ Project Overview
+NodeJS DevOps Application
+
+Tools Used:
+- Terraform
+- Jenkins
+- Docker
+- AWS
+- NodeJS
+
+
+2️⃣ Architecture
+Explain:
+GitHub → Jenkins → Docker → AWS EC2
+
+3️⃣ Setup Steps
+1 Install Jenkins
+2 Configure Docker
+3 Setup AWS credentials
+4 Run Terraform
+5 Run Jenkins pipeline
+
+4️⃣ Run Terraform
+terraform init
+terraform plan
+terraform apply
+
+5️⃣ Pipeline Execution
+Git push triggers Jenkins
+Pipeline builds Docker image
+Pushes to DockerHub
+Deploys to EC2
