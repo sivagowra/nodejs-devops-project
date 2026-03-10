@@ -1,15 +1,18 @@
 FROM node:16-slim AS builder
 WORKDIR /app
-COPY package*.json ./
+
+COPY app/package*.json ./
 RUN npm install
-COPY . .
+
+COPY app/ .
 RUN npm run build
 
-# Stage 2: Production
-FROM builder AS final
+FROM node:16-slim
 WORKDIR /app
+
 COPY --from=builder /app/build ./build
-COPY package*.json ./
+COPY app/package*.json ./
 RUN npm install --production
+
 EXPOSE 3000
 CMD ["npm", "start"]
