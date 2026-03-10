@@ -5,6 +5,7 @@ pipeline {
     environment {
         DOCKER_IMAGE = "sivagowra/node-devops-app"
         DOCKER_TAG = "latest"
+        SERVER_IP = "${SERVER_IP}"
     }
 
     stages {
@@ -64,18 +65,32 @@ pipeline {
                 sshagent(['server-ssh']) {
 
                     sh '''
-                    ssh ubuntu@SERVER-IP << EOF
-
-                    docker pull sivagowra/node-devops-app:latest
-
+                    ssh ubuntu@${SERVER_IP} << EOF
+                    set -e
+                    docker pull $DOCKER_IMAGE:$DOCKER_TAG
                     docker stop nodeapp || true
                     docker rm nodeapp || true
-
-                    docker run -d -p 3000:3000 --name nodeapp sivagowra/node-devops-app:latest
-
+                    docker run -d -p 3000:3000 --name nodeapp $DOCKER_IMAGE:$DOCKER_TAG
+                    echo "Deployment successful"
                     EOF
                     '''
                 }
+            }
+        }
+
+        stage('Health Check') {
+            steps {
+                sshagent(['server-ssh']) {
+                    sh '''
+                    ssh ubuntu@${SERVER_IP} << EOF
+                    sleep 5
+                    curl -f http://localhost:3000 || exit 1
+                    echo "Health check passed"
+                    EOF
+                    '''
+                }
+            }
+        }
             }
         }
     }

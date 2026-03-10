@@ -1,6 +1,15 @@
 #!/bin/bash
 
-docker stop nodeapp
-docker rm nodeapp
+set -e
 
-docker run -d -p 3000:3000 sivagowra/node-devops-app:previous
+echo "Rolling back to previous version..."
+
+docker stop nodeapp || true
+docker rm nodeapp || true
+
+docker run -d -p 3000:3000 --name nodeapp "${DOCKER_IMAGE}:previous" || {
+    echo "Rollback failed"
+    exit 1
+}
+
+echo "Rollback completed successfully"

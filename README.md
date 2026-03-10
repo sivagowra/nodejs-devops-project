@@ -25,13 +25,13 @@ GitHub → Jenkins → Docker → AWS EC2
 
 4️ Run Terraform
 
-terraform init
-terraform plan
-terraform apply
+- terraform init
+- terraform plan
+- terraform apply
 
 5️ Pipeline Execution
 
-Git push triggers Jenkins
-Pipeline builds Docker image
-Pushes to DockerHub
-Deploys to EC2
+- Git push triggers Jenkins
+- Pipeline builds Docker image
+- Pushes to DockerHub
+- Deploys to EC2
