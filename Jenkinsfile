@@ -8,7 +8,7 @@ pipeline {
     }
 
     environment {
-        DOCKER_IMAGE = "sivagowra/node:latest"
+        DOCKER_IMAGE = "sivagowra/node-devops-app:latest"
     }
 
     stages {

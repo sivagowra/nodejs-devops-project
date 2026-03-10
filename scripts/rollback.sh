@@ -2,6 +2,8 @@
 
 set -e
 
+DOCKER_IMAGE="sivagowra/node-devops-app"
+
 echo "Rolling back to previous version..."
 
 docker stop nodeapp || true
