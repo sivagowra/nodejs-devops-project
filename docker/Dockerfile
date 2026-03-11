@@ -1,7 +1,7 @@
 FROM node:16-alpine AS build
 WORKDIR /app
 COPY app/package*.json ./
-RUN npm ci      
+RUN npm install --production     
 
 COPY app/ .
 
